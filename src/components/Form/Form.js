@@ -9,6 +9,10 @@ const Form = ( { route } ) => {
 		formName = 'Sign in';
 	}
 
+	const onUpdate = (event) => {
+		console.log(event.target.value);
+	}
+
 	return (
 		<article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
 			<main className="pa4 black-80">
@@ -19,18 +23,22 @@ const Form = ( { route } ) => {
 			      </legend>
 			      {route==='Register' ? 
 			      	<div className="mt3">
-						<InputWithLabel type='text' name='name' id='name'>
+						<InputWithLabel type='text' name='name' id='name' onInputChange={onUpdate} >
 							Name
 						</InputWithLabel>
 					</div>
 			       : null}
-			      	<div className="mt3">
-						<InputWithLabel type='email' name='email-address' id='email-address'>
+
+			       <div className="mt3">
+				        <div className="mt3">
+						<InputWithLabel type='email' name='email-address' id='email-address' onInputChange={onUpdate}>
 							Email
 						</InputWithLabel>
 					</div>
+				      </div>
+
 			      	<div className="mv3">
-		      			<InputWithLabel type='password' name='password' id='password'>
+		      			<InputWithLabel type='password' name='password' id='password' onInputChange={onUpdate}>
 							Password
 						</InputWithLabel>
 			      	</div>

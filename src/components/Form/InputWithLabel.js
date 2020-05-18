@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputWithLabel = ( { type, name, id, children } ) => {
+const InputWithLabel = ( { type, name, id, children, onInputChange } ) => {
 	return (
 		<>
 		<label 
@@ -14,6 +14,7 @@ const InputWithLabel = ( { type, name, id, children } ) => {
         	type={type} 
         	name={name}  
         	id={id} 
+        	onChange={onInputChange}
         />
 		</>
 	)

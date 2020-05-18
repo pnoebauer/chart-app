@@ -1,30 +1,12 @@
 import React from 'react';
+import InputWithLabel from './InputWithLabel';
 
-const Form = ( { route }) => 
-{
-	// console.log(route);
-	var nameField;
+const Form = ( { route } ) => {
 	var formName;
-	if(route==='Register') 
-	{
+	if(route==='Register') {
 		formName = 'Register';
-		nameField = 
-			<div className="mt3">
-		        <label className="db fw6 lh-copy f6" htmlFor="name">
-		        	Name
-		        </label>
-		        <input 
-		        	className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-		        	type="text" 
-		        	name="name"  
-		        	id="name" 
-		        />
-			</div>;
-	}
-	else 
-	{
+	} else {
 		formName = 'Sign in';
-		nameField = ''; 
 	}
 
 	return (
@@ -35,37 +17,31 @@ const Form = ( { route }) =>
 			      <legend className="f1 fw6 ph0 mh0">
 			      	{formName}
 			      </legend>
-			      {nameField}
-			      <div className="mt3">
-			        <label className="db fw6 lh-copy f6" htmlFor="email-address">
-			        	Email
-			        </label>
-			        <input 
-			        	className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-			        	type="email" 
-			        	name="email-address"  
-			        	id="email-address" 
-			        />
-			      </div>
-			      <div className="mv3">
-			        <label className="db fw6 lh-copy f6" htmlFor="password">
-			        	Password
-			        </label>
-			        <input 
-			        	className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-			        	type="password" 
-			        	name="password"  
-			        	id="password" 
-			        />
-			      </div>
+			      {route==='Register' ? 
+			      	<div className="mt3">
+						<InputWithLabel type='text' name='name' id='name'>
+							Name
+						</InputWithLabel>
+					</div>
+			       : null}
+			      	<div className="mt3">
+						<InputWithLabel type='email' name='email-address' id='email-address'>
+							Email
+						</InputWithLabel>
+					</div>
+			      	<div className="mv3">
+		      			<InputWithLabel type='password' name='password' id='password'>
+							Password
+						</InputWithLabel>
+			      	</div>
 			    </fieldset>
-			    <div className="">
-			      <input 
-			      	className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
-			      	type="submit" 
-			      	value={formName}
-			      />
-			    </div>
+				    <div className="">
+				      <input 
+				      	className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
+				      	type="submit" 
+				      	value={formName}
+				      />
+				    </div>
 			  </div>
 			</main>
 		</article>

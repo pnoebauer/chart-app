@@ -3,7 +3,9 @@ import React from 'react';
 import 'tachyons';
 import './App.css';
 import Particles from 'react-particles-js';
-import Navigation from './components/Navigation';
+import Navigation from './components/Navigation/Navigation';
+import Logo from './components/Logo/Logo';
+import Form from './components/Form/Form';
 
 // https://vincentgarreau.com/particles.js/
 const particlesParams = {
@@ -32,24 +34,24 @@ function App() {
 
   const onRouteChange = (newRoute) => {
     setRoute(newRoute);
-    console.log(newRoute);
+    // console.log(newRoute);
   };
 
-  var createLogButtons;
+  var setupNav;
   if(route==='SignOut') 
   {  
-    createLogButtons = 
+    setupNav = 
       <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
-        <Navigation onRouteChange={onRouteChange} route='SignIn' routeName='Register'/>
+        <Navigation onRouteChange={onRouteChange} route='Register' routeName='Register'/>
         <Navigation onRouteChange={onRouteChange} route='SignIn' routeName='Sign in'/>
       </nav>;
   }
   else
   {
-    createLogButtons = 
-    <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
-      <Navigation onRouteChange={onRouteChange} route='SignOut' routeName='Sign out'/>;
-    </nav>;
+    setupNav = 
+      <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
+        <Navigation onRouteChange={onRouteChange} route='SignOut' routeName='Sign out'/>
+      </nav>;
   }
 
   return (
@@ -58,7 +60,9 @@ function App() {
         className='particles'
         params={particlesParams} 
       />
-      {createLogButtons}
+      {setupNav}
+      <Logo />
+      <Form route={route}/>
     </div>
   );
 }

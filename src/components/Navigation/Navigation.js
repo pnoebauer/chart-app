@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Navigation = ( { onRouteChange, route, routeName } ) => {
+const Navigation = ( { onRouteChange, route, children } ) => {
 	return (
 			<p onClick={() => onRouteChange(route)} className='f3 link underline dim black pa2 pointer'>
-				{routeName}
+				{children}
 			</p>
 	);
 }

@@ -31,27 +31,30 @@ const particlesParams = {
 function App() {
 
   const [route, setRoute] = React.useState('SignOut');
+  const [userName, setUserName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const onRouteChange = (newRoute) => {
     setRoute(newRoute);
-    // console.log(newRoute);
   };
 
-  var setupNav;
-  if(route==='SignOut') 
-  {  
-    setupNav = 
-      <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
-        <Navigation onRouteChange={onRouteChange} route='Register' routeName='Register'/>
-        <Navigation onRouteChange={onRouteChange} route='SignIn' routeName='Sign in'/>
-      </nav>;
-  }
-  else
-  {
-    setupNav = 
-      <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
-        <Navigation onRouteChange={onRouteChange} route='SignOut' routeName='Sign out'/>
-      </nav>;
+  const onFormUpdate = (event,type) => {
+    switch(type) {
+      case 'name':
+        setUserName(event.target.value);
+        break;
+      case 'email':
+       setEmail(event.target.value);
+        break;
+      case 'password':
+        setPassword(event.target.value);
+        break;
+      default:
+        // code block
+    }
+    // console.log(event.target.value,type);
+    // console.log(userName,email,password);
   }
 
   return (
@@ -60,11 +63,29 @@ function App() {
         className='particles'
         params={particlesParams} 
       />
-      {setupNav}
+      <SetupNav currentRoute={route} onRouteChange={onRouteChange} />
       <Logo />
-      <Form route={route}/>
+      <Form route={route} onFormUpdate={onFormUpdate} />
     </div>
   );
+}
+
+const SetupNav = ({currentRoute,onRouteChange}) => {
+  if(currentRoute==='SignOut') 
+  {  
+    return (
+          <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
+            <Navigation onRouteChange={onRouteChange} route='Register'>Register</Navigation>
+            <Navigation onRouteChange={onRouteChange} route='SignIn'>Sign in</Navigation>
+          </nav>);
+  }
+  else
+  {
+    return (
+          <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
+            <Navigation onRouteChange={onRouteChange} route='SignOut'>Sign out</Navigation>
+          </nav>);
+  }
 }
 
 export default App;

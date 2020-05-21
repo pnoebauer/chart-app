@@ -62,13 +62,34 @@ function App() {
     } // console.log(userName,email,password);
   }
 
-  const onSubmit = (type) => {
-    // console.log(type,'clicked');
-    fetch('http://localhost:3000')
+  const connectBackend = (address, fetchSettings) => {
+
+    fetch(address, fetchSettings)
       .then(returnedObject => returnedObject.json()
-        .then(data => console.log(data))
+        .then(
+          data => console.log(data))
       )
     .catch(err => console.log('cannot connect'));
+  }
+
+  const onSubmit = (type) => {
+    let UrlExtension, method, address;
+     UrlExtension = '';
+     method = 'get';
+     address = `http://localhost:3000/${UrlExtension}`;
+
+    const body = JSON.stringify({
+      userName: userName,
+      email: email,
+      password: password
+    });
+
+    const fetchSettings = {
+      method: method,
+      ...(method!=='get') && {headers: { 'Content-Type': 'application/json' }, body: body}
+    };
+    
+    connectBackend(address,fetchSettings);
   }
 
   return (

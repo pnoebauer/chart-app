@@ -63,7 +63,12 @@ function App() {
   }
 
   const onSubmit = (type) => {
-    console.log(type,'clicked');
+    // console.log(type,'clicked');
+    fetch('http://localhost:3000')
+      .then(returnedObject => returnedObject.json()
+        .then(data => console.log(data))
+      )
+    .catch(err => console.log('cannot connect'));
   }
 
   return (

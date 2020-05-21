@@ -1,7 +1,7 @@
 import React from 'react';
 import InputWithLabel from './InputWithLabel';
 
-const Form = ( { route, onFormUpdate } ) => {
+const Form = ( { route, onFormUpdate, onSubmit } ) => {
 	var formName;
 	if(route==='Register') {
 		formName = 'Register';
@@ -16,29 +16,45 @@ const Form = ( { route, onFormUpdate } ) => {
 		      <legend className="f1 fw6 ph0 mh0">
 		      	{formName}
 		      </legend>
-		      {route==='Register' ? 
+		      {route==='Register' && 
 		      	<div className="mt3">
-					<InputWithLabel type='text' name='name' id='name' onInputChange={(event) => onFormUpdate(event,'name')} >
+					<InputWithLabel 
+						type='text' 
+						name='name' 
+						id='name' 
+						onInputChange={(event) => onFormUpdate(event,'name')} 
+					>
 						Name
 					</InputWithLabel>
 				</div>
-		       : null}
+		       }
 		       <div className="mt3">
-					<InputWithLabel type='email' name='email-address' id='email-address' onInputChange={(event) => onFormUpdate(event,'email')} >
+					<InputWithLabel 
+						type='email' 
+						name='email-address' 
+						id='email-address' 
+						onInputChange={(event) => onFormUpdate(event,'email')} 
+					>
 						Email
 					</InputWithLabel>
 				</div>
 		      	<div className="mv3">
-	      			<InputWithLabel type='password' name='password' id='password' onInputChange={(event) => onFormUpdate(event,'password')} >
+	      			<InputWithLabel 
+	      				type='password' 
+	      				name='password' 
+	      				id='password' 
+	      				onInputChange={(event) => onFormUpdate(event,'password')} 
+	      			>
 						Password
 					</InputWithLabel>
 		      	</div>
 		    </fieldset>
-			    <div className="">
+			    <div className="button">
 			      <input 
 			      	className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
 			      	type="submit" 
 			      	value={formName}
+			      	onClick={()=>onSubmit(formName)}
 			      />
 			    </div>
 		  </div>

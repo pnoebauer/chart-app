@@ -28,12 +28,19 @@ const particlesParams = {
   }
 };
 
+var initialState = {
+  route: 'SignOut',
+  userName: '',
+  email: '',
+  password: '',
+}
+
 function App() {
 
-  const [route, setRoute] = React.useState('SignOut');
-  const [userName, setUserName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [route, setRoute] = React.useState(initialState.route);
+  const [userName, setUserName] = React.useState(initialState.userName);
+  const [email, setEmail] = React.useState(initialState.email);
+  const [password, setPassword] = React.useState(initialState.password);
 
   const onRouteChange = (newRoute) => {
     setRoute(newRoute);
@@ -51,10 +58,12 @@ function App() {
         setPassword(event.target.value);
         break;
       default:
-        // code block
-    }
-    // console.log(event.target.value,type);
-    // console.log(userName,email,password);
+        console.log('Field type unavailable.')
+    } // console.log(userName,email,password);
+  }
+
+  const onSubmit = (type) => {
+    console.log(type,'clicked');
   }
 
   return (
@@ -65,22 +74,19 @@ function App() {
       />
       <SetupNav currentRoute={route} onRouteChange={onRouteChange} />
       <Logo />
-      <Form route={route} onFormUpdate={onFormUpdate} />
+      <Form route={route} onFormUpdate={onFormUpdate} onSubmit={onSubmit}/>
     </div>
   );
 }
 
 const SetupNav = ({currentRoute,onRouteChange}) => {
-  if(currentRoute==='SignOut') 
-  {  
+  if(currentRoute==='SignOut') {  
     return (
           <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
             <Navigation onRouteChange={onRouteChange} route='Register'>Register</Navigation>
             <Navigation onRouteChange={onRouteChange} route='SignIn'>Sign in</Navigation>
           </nav>);
-  }
-  else
-  {
+  } else {
     return (
           <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
             <Navigation onRouteChange={onRouteChange} route='SignOut'>Sign out</Navigation>

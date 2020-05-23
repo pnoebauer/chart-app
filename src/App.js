@@ -57,29 +57,12 @@ function App() {
   //updates the state when the user types into the input fields
   // const onFormUpdate = (event,type) => {
   const onFormUpdate = (event) => {
-    let type = event.target.name;
-    switch(type) {
-      case 'name':
-        setUser(
+    let fieldType = event.target.name;
+    let input = event.target.value;
+    setUser(
           { ...user,
-            name: event.target.value
+            [fieldType]: input
           });
-        break;
-      case 'email':
-       setUser(
-          { ...user,
-            email: event.target.value
-          });
-        break;
-      case 'password':
-        setUser(
-          { ...user,
-            password: event.target.value
-          });
-        break;
-      default:
-        console.log('Field type unavailable.')
-    }
   }
 
   const loadUser = (userData) => {

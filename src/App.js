@@ -30,22 +30,37 @@ const particlesParams = {
 
 var initialState = {
   route: 'SignOut',
+  isSignedIn: false,
   userName: '',
   email: '',
   password: '',
+  userId: '',
+  userJoinDate: '',
 }
 
 function App() {
 
   const [route, setRoute] = React.useState(initialState.route);
+  const [isSignedIn, setIsSignedIn] = React.useState(initialState.isSignedIn);
   const [userName, setUserName] = React.useState(initialState.userName);
   const [email, setEmail] = React.useState(initialState.email);
   const [password, setPassword] = React.useState(initialState.password);
+  const [userId, setUserId] = React.useState(initialState.userId);
+  const [userJoinDate, setUserJoinDate] = React.useState(initialState.userJoinDate);
 
   const onRouteChange = (newRoute) => {
     setRoute(newRoute);
+    if(newRoute === 'SignOut'){
+      setIsSignedIn(initialState.isSignedIn);
+      setUserName(initialState.userName);
+      setEmail(initialState.email);
+      setPassword(initialState.password);
+      setUserId(initialState.userId);
+      setUserJoinDate(initialState.userJoinDate);
+    }
   };
 
+  //updates the state when the user types into the input fields
   const onFormUpdate = (event,type) => {
     switch(type) {
       case 'name':
@@ -59,27 +74,55 @@ function App() {
         break;
       default:
         console.log('Field type unavailable.')
-    } // console.log(userName,email,password);
+    }
+  }
+
+  const loadUser = (userData) => {
+    setUserName(userData.name);
+    setEmail(userData.email);
+    setUserId(userData.id);
+    setUserJoinDate(userData.joined);
+    setIsSignedIn(true);
+    setRoute('SignIn');
   }
 
   const connectBackend = (address, fetchSettings) => {
-
     fetch(address, fetchSettings)
-      .then(returnedObject => returnedObject.json()
-        .then(
-          data => console.log(data))
+      .then(response => response.json()
+        .then(userData => {
+            if(userData.id){
+              loadUser(userData);
+            }
+            else console.log('no user returned - res:',userData);
+          })
       )
-    .catch(err => console.log('cannot connect'));
+      .catch(err => {
+        console.log('cannot connect');
+      });
   }
 
-  const onSubmit = (type) => {
+  //when the user clicks the submit button the input data is sent to the backend
+  const onSubmit = (formType) => {
     let UrlExtension, method, address;
-     UrlExtension = '';
-     method = 'get';
-     address = `http://localhost:3000/${UrlExtension}`;
+
+    switch (formType){
+      case 'Sign in':
+        UrlExtension = 'signin';
+        method = 'post';
+        break;
+      case 'Register':
+        UrlExtension = 'register';
+        method = 'post';
+        break;
+      default:
+        UrlExtension = '';
+        method = 'get';
+    }
+
+    address = `http://localhost:3000/${UrlExtension}`;
 
     const body = JSON.stringify({
-      userName: userName,
+      ...(UrlExtension==='register') && {name: userName},
       email: email,
       password: password
     });
@@ -88,8 +131,9 @@ function App() {
       method: method,
       ...(method!=='get') && {headers: { 'Content-Type': 'application/json' }, body: body}
     };
-    
+
     connectBackend(address,fetchSettings);
+    // console.log(userName,email,userId,userJoinDate);
   }
 
   return (
@@ -100,7 +144,11 @@ function App() {
       />
       <SetupNav currentRoute={route} onRouteChange={onRouteChange} />
       <Logo />
-      <Form route={route} onFormUpdate={onFormUpdate} onSubmit={onSubmit}/>
+      {isSignedIn ?
+        <p>name:{userName} id:{userId} email: {email} join date: {userJoinDate}</p>
+        :
+        <Form route={route} onFormUpdate={onFormUpdate} onSubmit={onSubmit}/>
+      }
     </div>
   );
 }

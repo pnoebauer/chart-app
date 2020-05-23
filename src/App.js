@@ -31,32 +31,26 @@ const particlesParams = {
 var initialState = {
   route: 'SignOut',
   isSignedIn: false,
-  userName: '',
-  email: '',
-  password: '',
-  userId: '',
-  userJoinDate: '',
+  user: {
+    name: '',
+    email: '',
+    password: '',
+    id: '',
+    joinDate: ''
+  }
 }
 
 function App() {
 
   const [route, setRoute] = React.useState(initialState.route);
   const [isSignedIn, setIsSignedIn] = React.useState(initialState.isSignedIn);
-  const [userName, setUserName] = React.useState(initialState.userName);
-  const [email, setEmail] = React.useState(initialState.email);
-  const [password, setPassword] = React.useState(initialState.password);
-  const [userId, setUserId] = React.useState(initialState.userId);
-  const [userJoinDate, setUserJoinDate] = React.useState(initialState.userJoinDate);
+  const [user, setUser] = React.useState(initialState.user);
 
   const onRouteChange = (newRoute) => {
     setRoute(newRoute);
     if(newRoute === 'SignOut'){
       setIsSignedIn(initialState.isSignedIn);
-      setUserName(initialState.userName);
-      setEmail(initialState.email);
-      setPassword(initialState.password);
-      setUserId(initialState.userId);
-      setUserJoinDate(initialState.userJoinDate);
+      setUser(initialState.user);
     }
   };
 
@@ -66,13 +60,22 @@ function App() {
     let type = event.target.name;
     switch(type) {
       case 'name':
-        setUserName(event.target.value);
+        setUser(
+          { ...user,
+            name: event.target.value
+          });
         break;
       case 'email':
-       setEmail(event.target.value);
+       setUser(
+          { ...user,
+            email: event.target.value
+          });
         break;
       case 'password':
-        setPassword(event.target.value);
+        setUser(
+          { ...user,
+            password: event.target.value
+          });
         break;
       default:
         console.log('Field type unavailable.')
@@ -80,12 +83,14 @@ function App() {
   }
 
   const loadUser = (userData) => {
-    setUserName(userData.name);
-    setEmail(userData.email);
-    setUserId(userData.id);
-    setUserJoinDate(userData.joined);
     setIsSignedIn(true);
     setRoute('SignIn');
+    setUser({ ...user,
+            name: userData.name,
+            email: userData.email,
+            id: userData.id,
+            joinDate: userData.joined,
+          })
   }
 
   const connectBackend = (address, fetchSettings) => {
@@ -124,9 +129,9 @@ function App() {
     address = `http://localhost:3000/${UrlExtension}`;
 
     const body = JSON.stringify({
-      ...(UrlExtension==='register') && {name: userName},
-      email: email,
-      password: password
+      ...(UrlExtension==='register') && {name: user.name},
+      email: user.email,
+      password: user.password
     });
 
     const fetchSettings = {
@@ -135,7 +140,6 @@ function App() {
     };
 
     connectBackend(address,fetchSettings);
-    // console.log(userName,email,userId,userJoinDate);
   }
 
   return (
@@ -147,7 +151,7 @@ function App() {
       <SetupNav currentRoute={route} onRouteChange={onRouteChange} />
       <Logo />
       {isSignedIn ?
-        <p>name:{userName} id:{userId} email: {email} join date: {userJoinDate}</p>
+        <p>name:{user.name} id:{user.id} email: {user.email} join date: {user.joinDate}</p>
         :
         <Form route={route} onFormUpdate={onFormUpdate} onSubmit={onSubmit}/>
       }

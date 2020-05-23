@@ -131,7 +131,7 @@ function App() {
         className='particles'
         params={particlesParams} 
       />
-      <SetupNav currentRoute={route} onRouteChange={onRouteChange} />
+      <Navigation currentRoute={route} onRouteChange={onRouteChange} />
       <Logo />
       {isSignedIn ?
         <p>name:{user.name} id:{user.id} email: {user.email} join date: {user.joinDate}</p>
@@ -140,21 +140,6 @@ function App() {
       }
     </div>
   );
-}
-
-const SetupNav = ({currentRoute,onRouteChange}) => {
-  if(currentRoute==='SignOut') {  
-    return (
-          <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
-            <Navigation onRouteChange={onRouteChange} route='Register'>Register</Navigation>
-            <Navigation onRouteChange={onRouteChange} route='SignIn'>Sign in</Navigation>
-          </nav>);
-  } else {
-    return (
-          <nav style = {{display: 'flex', justifyContent: 'flex-end'}} >
-            <Navigation onRouteChange={onRouteChange} route='SignOut'>Sign out</Navigation>
-          </nav>);
-  }
 }
 
 export default App;

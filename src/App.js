@@ -61,7 +61,9 @@ function App() {
   };
 
   //updates the state when the user types into the input fields
-  const onFormUpdate = (event,type) => {
+  // const onFormUpdate = (event,type) => {
+  const onFormUpdate = (event) => {
+    let type = event.target.name;
     switch(type) {
       case 'name':
         setUserName(event.target.value);

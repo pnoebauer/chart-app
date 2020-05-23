@@ -22,7 +22,7 @@ const Form = ( { route, onFormUpdate, onSubmit } ) => {
 						type='text' 
 						name='name' 
 						id='name' 
-						onInputChange={(event) => onFormUpdate(event,'name')} 
+						onInputChange={onFormUpdate} 
 					>
 						Name
 					</InputWithLabel>
@@ -31,9 +31,9 @@ const Form = ( { route, onFormUpdate, onSubmit } ) => {
 		       <div className="mt3">
 					<InputWithLabel 
 						type='email' 
-						name='email-address' 
+						name='email' 
 						id='email-address' 
-						onInputChange={(event) => onFormUpdate(event,'email')} 
+						onInputChange={onFormUpdate/*(event) => onFormUpdate(event,'email')*/} 
 					>
 						Email
 					</InputWithLabel>
@@ -43,7 +43,7 @@ const Form = ( { route, onFormUpdate, onSubmit } ) => {
 	      				type='password' 
 	      				name='password' 
 	      				id='password' 
-	      				onInputChange={(event) => onFormUpdate(event,'password')} 
+	      				onInputChange={onFormUpdate} 
 	      			>
 						Password
 					</InputWithLabel>

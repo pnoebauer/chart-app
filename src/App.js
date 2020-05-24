@@ -92,9 +92,9 @@ function App() {
   }
 
   //when the user clicks the submit button the input data is sent to the backend
-  const onSubmit = (formType) => {
-    let UrlExtension, method, address;
-
+  const onSubmit = (event) => {
+    let UrlExtension, method, address, formType;
+    formType = event.target.value;
     switch (formType){
       case 'Sign in':
         UrlExtension = 'signin';

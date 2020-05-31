@@ -17,7 +17,7 @@ const Navigation = ({ currentRoute,onRouteChange }) => {
 
 const Link = ( { onRouteChange, route, children } ) => {
 	return (
-			<p onClick={() => onRouteChange(route)} className='f3 link underline dim black pa2 pointer'>
+			<p onClick={() => onRouteChange(route)} className='f3 link underline dim black ph3 pv2 pb1 mb1 pointer'>
 				{children}
 			</p>
 	);

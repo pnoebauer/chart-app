@@ -6,6 +6,8 @@ import Particles from 'react-particles-js';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import Form from './components/Form/Form';
+import Scroll from './components/Scroll/Scroll';
+import AssetInput from './components/AssetInput/AssetInput';
 
 // https://vincentgarreau.com/particles.js/
 const particlesParams = {
@@ -133,10 +135,16 @@ function App() {
       />
       <Navigation currentRoute={route} onRouteChange={onRouteChange} />
       <Logo />
+      <AssetInput />
       {isSignedIn ?
-        <p>name:{user.name} id:{user.id} email: {user.email} join date: {user.joinDate}</p>
+        <div>
+          <AssetInput />
+          <Scroll>
+            <p>name:{user.name} id:{user.id} email: {user.email} join date: {user.joinDate}</p>
+          </Scroll>
+        </div>
         :
-        <Form route={route} onFormUpdate={onFormUpdate} onSubmit={onSubmit}/>
+          <Form route={route} onFormUpdate={onFormUpdate} onSubmit={onSubmit}/>
       }
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import CandlestickChart from './CandlestickChart';
+// import CandlestickChart from './CandlestickChart';
+import CandlestickChart from './ChartHooks';
 import { getData } from './GetData';
 
 const DisplayChart = () => {
@@ -33,9 +34,8 @@ const DisplayChart = () => {
 	    	{data.length && 
 	    		<div className="Chart">
 	    			{/*console.log('mount',data.length,data)*/}
-	    			Chart Test	
+	    			<h1>Chart Test	</h1>
 	    			<CandlestickChart type={type} data={data} />
-
 	    		</div>
 	    	}
 	    	</React.Fragment>

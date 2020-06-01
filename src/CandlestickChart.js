@@ -20,7 +20,7 @@ class CandleStickChart extends React.Component {
 			xRetrieve(data[data.length - 100])
 		];
 		return (
-			<ChartCanvas height={400}
+			<ChartCanvas height={800}
 					ratio={ratio}
 					width={width}
 					margin={{ left: 50, right: 50, top: 10, bottom: 30 }}

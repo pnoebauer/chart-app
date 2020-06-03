@@ -7,12 +7,25 @@ import { utcDay } from "d3-time";
 import { ChartCanvas, Chart } from "react-stockcharts";
 import { CandlestickSeries } from "react-stockcharts/lib/series";
 import { XAxis, YAxis } from "react-stockcharts/lib/axes";
-import { fitWidth } from "react-stockcharts/lib/helper";
+// import { fitWidth } from "react-stockcharts/lib/helper";
+import { fitChart } from "react-stockcharts/lib/helper";
+//https://www.freecodecamp.org/forum/t/what-does-mean-in-an-es6-import-statement/268940/3
+// NODE IMPLEMENTATION with require: 
+// 1) look in node_modules…
+// 2) for a folder called my-module…
+// 3) then load the index.js file from there.
+
+// NPM implementation
+// import React from "../../node_modules/react/index"
+
+//IF NOT ./ path is used with import webpack assumes the node implementation
+
 import { last, timeIntervalBarWidth } from "react-stockcharts/lib/utils";
 
-var CandleStickChart = ({ type, width, data, ratio }) => {
+var CandleStickChart = ({ type, width, data, ratio, height }) => {
 // function CandleStickChart({ type, width, data, ratio }) {
 
+	console.log(width);
 	const xRetrieve = d => d.date;
 	const xExtents = [
 				xRetrieve(last(data)),
@@ -20,7 +33,7 @@ var CandleStickChart = ({ type, width, data, ratio }) => {
 			];
 
 	return (
-		<ChartCanvas height={400}
+		<ChartCanvas height={height}
 			ratio={ratio}
 			width={width}
 			margin={{ left: 50, right: 50, top: 10, bottom: 30 }}
@@ -60,5 +73,6 @@ CandleStickChart.defaultProps = {
 	type: "svg",
 };
 
-CandleStickChart = fitWidth(CandleStickChart);
+// CandleStickChart = fitWidth(CandleStickChart);
+CandleStickChart = fitChart(CandleStickChart);
 export default CandleStickChart;

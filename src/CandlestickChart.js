@@ -7,12 +7,13 @@ import { utcDay } from "d3-time";
 import { ChartCanvas, Chart } from "react-stockcharts";
 import { CandlestickSeries } from "react-stockcharts/lib/series";
 import { XAxis, YAxis } from "react-stockcharts/lib/axes";
-import { fitWidth } from "react-stockcharts/lib/helper";
+// import { fitWidth } from "react-stockcharts/lib/helper";
+import { fitChart } from "react-stockcharts/lib/helper";
 import { last, timeIntervalBarWidth } from "react-stockcharts/lib/utils";
 
 class CandleStickChart extends React.Component {
 	render() {
-		const { type, width, data, ratio } = this.props;
+		const { type, width, data, ratio,height } = this.props;
 		
 		const xRetrieve = d => d.date;
 		const xExtents = [
@@ -20,7 +21,7 @@ class CandleStickChart extends React.Component {
 			xRetrieve(data[data.length - 100])
 		];
 		return (
-			<ChartCanvas height={800}
+			<ChartCanvas height={height}
 					ratio={ratio}
 					width={width}
 					margin={{ left: 50, right: 50, top: 10, bottom: 30 }}
@@ -58,6 +59,7 @@ CandleStickChart.propTypes = {
 CandleStickChart.defaultProps = {
 	type: "svg",
 };
-CandleStickChart = fitWidth(CandleStickChart);
+// CandleStickChart = fitWidth(CandleStickChart);
+CandleStickChart = fitChart(CandleStickChart);
 
 export default CandleStickChart;

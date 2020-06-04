@@ -1,0 +1,13 @@
+//NEXT TRY GETTING fitChart.js directly into components
+//WILL REQUIRE ./ ../../ PATHS
+
+//https://www.freecodecamp.org/forum/t/what-does-mean-in-an-es6-import-statement/268940/3
+// NODE IMPLEMENTATION with require: 
+// 1) look in node_modules…
+// 2) for a folder called my-module…
+// 3) then load the index.js file from there.
+
+// NPM implementation
+// import React from "../../node_modules/react/index"
+
+//IF NOT ./ path is used with import webpack assumes the node implementation

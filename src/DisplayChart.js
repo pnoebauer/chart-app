@@ -26,23 +26,30 @@ const DisplayChart = () => {
 	},[]);
 
 	return (
-		<div>
-		{/*console.log('fragment',isLoading,'data',data)*/}
-			{isLoading ? (<div>Loading ...</div>) : 
-			(
-			<React.Fragment>
-	    	{data.length && 
-	    		<div className="Chart">
-	    			{/*console.log('mount',data.length,data)*/}
-	    			<h1>Chart Test	</h1>
-	    			<CandlestickChart type={type} data={data} />
-	    		</div>
-	    	}
-	    	</React.Fragment>
-
-	    	)
-	      	}
-		</div>
+		<React.Fragment>
+			<nav className="zone blue sticky">
+				<ul className="main-nav">
+					<li><a href="/#/react">About</a></li>
+					<li><a href="/#/react">Products</a></li>
+					<li><a href="/#/react">Our Team</a></li>
+					<li className="push"><a href="/#/react">Contacts</a></li>
+				</ul>
+			</nav>
+			
+				{isLoading ? (<div>Loading ...</div>) 
+				: 
+				(
+				<React.Fragment>
+		    		{data.length && 
+		    		<div className="Chart">
+		    			{/*console.log('mount',data.length,data)*/}		    			
+		    			<CandlestickChart type={type} data={data} />
+		    		</div>
+		    		}
+		    	</React.Fragment>
+		    	)
+		      	}
+		</React.Fragment>
 	);
 }
 

@@ -1,5 +1,4 @@
-// import React from 'react';
-import { tsvParse } from  "d3-dsv";
+import { tsvParse, csvParse } from  "d3-dsv";
 import { timeParse } from "d3-time-format";
 
 // tsvParse(data, parseData(parseDate))
@@ -10,7 +9,7 @@ const parseData = (parse) => {
 	// parseTime("June 30, 2015"); // Tue Jun 30 2015 00:00:00 GMT-0700 (PDT)
 	//parse = timeParse("%Y-%m-%d");
 	return (d) => {
-		// console.log('d object',d);
+		// console.log('before d object',d);
 		// console.log('before',d.date);
 		d.date = parse(d.date); //convert date string to datestamp
 		// console.log('after',d.date);
@@ -19,7 +18,7 @@ const parseData = (parse) => {
 		d.low = +d.low;
 		d.close = +d.close;
 		d.volume = +d.volume;
-		// console.log('d object',d);
+		// console.log('after d object',d);
 		return d;
 	};
 }
@@ -27,10 +26,18 @@ const parseData = (parse) => {
 const parseDate = timeParse("%Y-%m-%d");
 // const getData = () => {
 export function getData() {	
+
 	const promiseMSFT = 
-		fetch("https://cdn.rawgit.com/rrag/react-stockcharts/master/docs/data/MSFT.tsv")
+		fetch("http://localhost:4000/files/csv")
 			.then(response => response.text())
-			.then(data => tsvParse(data, parseData(parseDate))); //d3.tsvParse("foo\tbar\n1\t2"); // [{foo: "1", bar: "2"}, columns: ["foo", "bar"]]
+			// .then(data => console.log(data));
+			.then(data => csvParse(data, parseData(parseDate)));
+
+	// const promiseMSFT = 
+	// 	fetch("https://cdn.rawgit.com/rrag/react-stockcharts/master/docs/data/MSFT.tsv")
+	// 		.then(response => response.text())
+	// 		.then(data => tsvParse(data, parseData(parseDate))); //d3.tsvParse("foo\tbar\n1\t2"); // [{foo: "1", bar: "2"}, columns: ["foo", "bar"]]
+
 	return promiseMSFT;
 }
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 // import CandlestickChart from './CandlestickChart';
 import CandlestickChart from './ChartHooks';
+// import CandlestickChart from './IntradayChart';
+// import CandlestickChart from './InterdayChart';
 import { getData } from './GetData';
 
 const DisplayChart = () => {

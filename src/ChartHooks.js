@@ -40,7 +40,7 @@ var CandleStickChart = ({ type, width, data: initialData, ratio, height }) => {
 		<ChartCanvas height={(vh*0.8)}
 			ratio={ratio}
 			width={width}
-			margin={{ left: 50, right: 50, top: 50, bottom: 50 }}
+			margin={{ left: 50, right: 50, top: 50, bottom: 30 }}
 			type={type}
 			seriesName="Asset"
 			data={data}

@@ -47,9 +47,45 @@ button {
 	margin-left: auto; /*adds margins on the left so that the li element is pushed to the right edge*/
 }
 
+/*.barPeriod {
+  display: flex;
+  margin-left: auto; adds margins on the left so that the li element is pushed to the right edge
+  margin-right: 50px;
+}*/
+
+.barPeriodButtons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.barPeriodButtons .button {
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 2px;
+  text-decoration: none;
+  background-color: white;
+  font-size: 3vh;
+  transition: 0.3s;
+  width: 5vw;
+}
+.barPeriodButtons .button:last-child {
+  margin-right: 50px;
+}
+
+.barPeriodButtons .button:hover {
+  background-color: grey;
+  opacity: 0.8;
+}
+
+.active {
+  background-color: blue;
+  opacity: 1;
+  border: 1px solid grey;
+}
+
+
 li {
 	padding: 2vh; 
-
 }
 
 a {

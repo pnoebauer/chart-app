@@ -2,8 +2,6 @@ import { csvParse } from  "d3-dsv";
 // import { tsvParse } from  "d3-dsv";
 // import { timeParse } from "d3-time-format";
 
-// tsvParse(data, parseData(parseDate))
-// row conversion is used - parseData achieves the conversion
 const parseData = (parse) => { 
 	return (d) => {
 		// console.log('before d object',d);
@@ -23,7 +21,6 @@ const parseData = (parse) => {
 
 export function getData(period) {	
 
-	// console.log(period)
 	// const period = 'hour';
 
 	const body = JSON.stringify({

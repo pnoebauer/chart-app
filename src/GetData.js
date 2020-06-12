@@ -21,17 +21,27 @@ const parseData = (parse) => {
 /*use timeParse if the datetime from the fetched csv file needs to be changed */
 // const parseDate = timeParse("%Y-%m-%d");
 
-export function getData() {	
+export function getData(period) {	
+
+	// console.log(period)
+	// const period = 'hour';
+
+	const body = JSON.stringify({
+      period: period,
+    });
+
+    const fetchSettings = {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' }, 
+      body: body
+    };
 
 	const promiseData = 
-		fetch("http://localhost:4000/files/csv") //"https://cdn.rawgit.com/rrag/react-stockcharts/master/docs/data/MSFT.tsv"
+		fetch("http://localhost:4000/files/csv",fetchSettings) //"https://cdn.rawgit.com/rrag/react-stockcharts/master/docs/data/MSFT.tsv"
 			.then(response => response.text())			
 			// .then(data => csvParse(data, parseData(parseDate)))
 			.then(data => csvParse(data, parseData(d => new Date(+d))))
 			// .then(data => console.log(data))
 
-		// fetch("https://cdn.rawgit.com/rrag/react-stockcharts/master/docs/data/MSFT_INTRA_DAY.tsv")
-		// 	.then(response => response.text())
-		// 	.then(data => tsvParse(data, parseData(d => new Date(+d))));
 	return promiseData;
 }

@@ -7,36 +7,41 @@ import { getData } from './GetData';
 
 
 const barPeriods = ['month','day','hour','minute'];
-const initalBP = {
-	month: false,
-	day: false,
-	hour: false,
-	minute: false
-};
+// const initalBP = {
+// 	month: false,
+// 	day: false,
+// 	hour: false,
+// 	minute: false
+// };
+
 
 const DisplayChart = () => {
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isToggleOn, setToggle] = useState(true);
+	// const [isToggleOn, setToggle] = useState(true);
 
-	const [activeBP, setActiveBP] = useState(initalBP);
+	// const [activeBP, setActiveBP] = useState(initalBP);
+	const [activatedBP, setActivatedBP] = useState('day');
 
 	const type = 'svg';
 	
 	const handleBPClick = (event) => {
 		const clickSource = event.target.value;
 		// console.log('clicked',clickSource);
-		setActiveBP({
-			...initalBP,
-			[clickSource]: true
-		})
+		// setActiveBP({
+		// 	...initalBP,
+		// 	[clickSource]: true
+		// })
+		setActivatedBP(clickSource);
 		// console.log(activeBP);
   	}
 
 	const barPeriodButtons = barPeriods.map((value,index) => {
 		// set class based on active state
-		const active = activeBP[value] ? 'active' : 'inactive';
-		console.log(activeBP[value],active,value);
+		// const active = activeBP[value] ? 'active' : 'inactive';
+		const active = activatedBP===value ? 'active' : 'inactive';
+		console.log(activatedBP,active,value);
+		// console.log(activeBP[value],active,value);
 
 		return (
 			<button key={value} value={value} className={'button ' + active} onClick={handleBPClick}>
@@ -53,7 +58,7 @@ const DisplayChart = () => {
 		// console.log('init');
 		setIsLoading(true);
 
-		getData()
+		getData('day')
 		.then(retData => {
 			if(retData.length) {
 				setData(retData);
@@ -63,11 +68,12 @@ const DisplayChart = () => {
 		.catch(err => {
         		console.log('cannot connect');
       	});
-	},[]);
+      },[activatedBP]);
+	// },[activeBP]);
 
-	const handleClick = () => {
-		setToggle(!isToggleOn);
-  	}
+	// const handleClick = () => {
+	// 	setToggle(!isToggleOn);
+ //  	}
 
 	return (
 		<React.Fragment>
